@@ -1,38 +1,33 @@
 <html>
-	<head>
-		<title>Chat App</title>
-	</head>
-	<body>
-		<div id="chat">
-		</div>
-		<form id="send-message">
-			<input size="35" id="message"></input>
-			<input type="submit"></input>
-		</form>
-		
-		<script src="jquery-1.11.2.min.js"></script>
-		<script src="/socket.io/socket.io/js"></script>
-		
-		<script>
-				$(document).ready(function() {
-						var socket = io.connect();
-						var $messageForm = $('#send-message');
-						var $messageBox = $('#message');
-						var $chat = $('#chat');
-						
-						// Send message to server
-						$messageForm.submit(function(event) {
-								event.preventDefault();
-								socket.emit('Send Message', $messageBox.val());
-								$messageBox.val('');
-						});
-						
-						//Receive message in browser
-						socket.on('New Message', function(data) {
-								$chat.append(data + "<br/>");
-						});
-				});
-		</script>
-		
-	</body>
+  <head>
+    <title>Chat App</title>
+  </head>
+  <body>
+  
+    <div id="user-name">
+      <p>Enter a username:</p>
+      <p id="name-error"></p>
+      <form id="set-name">
+        <input size="35" id="name"></input>
+        <input type="button" value="Submit"></input>
+      </form>
+    </div>
+    
+    <div id="content">
+      <div id="chat-box">
+        <div id="chat">
+        </div>
+        <form id="send-message">
+          <input size="35" id="message"></input>
+          <input type="submit" value="Send Message"></input>
+        </form>
+      </div>
+      <div id="users"></div>
+    </div>
+    
+    <script src="scripts/chat.js"></script>
+    <script src="jquery-1.11.2.min.js"></script>
+    <script src="/socket.io/socket.io/js"></script>
+    
+  </body>
 </html>
